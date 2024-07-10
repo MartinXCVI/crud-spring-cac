@@ -25,4 +25,23 @@ public class UsuarioService {
     public Optional<UsuarioModel> getById(Long id) {
         return usuarioRepository.findById(id);
     }
+
+    public UsuarioModel updateById(UsuarioModel request, Long id) {
+        UsuarioModel usuario = usuarioRepository.findById(id).get();
+
+        usuario.setNombre(request.getNombre());
+        usuario.setApellido(request.getApellido());
+        usuario.setEmail(request.getEmail());
+
+        return usuario;
+    }
+
+    public Boolean deleteUsuario(Long id) {
+        try {
+            usuarioRepository.deleteById(id);
+            return true;
+        } catch(Exception err) {
+            return false;
+        }
+    }
 }
